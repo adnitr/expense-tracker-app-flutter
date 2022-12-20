@@ -1,9 +1,10 @@
+import 'package:expense_tracker/widgets/adaptive_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTransaction;
-  NewTransaction(this.addTransaction, {super.key});
+  const NewTransaction(this.addTransaction, {super.key});
   @override
   State<NewTransaction> createState() => _NewTransactionState();
 }
@@ -60,7 +61,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   TextField(
-                    decoration: InputDecoration(labelText: 'Title'),
+                    decoration: const InputDecoration(labelText: 'Title'),
                     controller: titleController,
                     onSubmitted: (_) => _submitData(),
                     // onChanged: (value) {
@@ -68,10 +69,10 @@ class _NewTransactionState extends State<NewTransaction> {
                     // },
                   ),
                   TextField(
-                    decoration: InputDecoration(labelText: 'Amount'),
+                    decoration: const InputDecoration(labelText: 'Amount'),
                     controller: amountController,
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     onSubmitted: (_) => _submitData(),
                     // onChanged: (val) {
                     //   AmountInput = val;
@@ -85,22 +86,16 @@ class _NewTransactionState extends State<NewTransaction> {
                             child: Text(!_selected
                                 ? 'No Date Chosen!'
                                 : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}')),
-                        TextButton(
-                          onPressed: _presentDatePicker,
-                          child: Text(
-                            'Choose Date',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        )
+                        AdaptiveButton(_presentDatePicker)
                       ],
                     ),
                   ),
                   ElevatedButton(
                     onPressed: _submitData,
-                    child: Text('Add Transaction'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                     ),
+                    child: const Text('Add Transaction'),
                   )
                 ],
               ),
